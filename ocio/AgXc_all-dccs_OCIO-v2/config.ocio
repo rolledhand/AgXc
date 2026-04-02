@@ -105,7 +105,7 @@ colorspaces:
   - !<ColorSpace>
     name: sRGB-2.2
     aliases: [g22_rec709, g22_encoded_rec709, Gamma 2.2 Encoded Rec.709]
-    family: Colorspaces
+    family: Utility
     equalitygroup: ""
     bitdepth: unknown
     description: sRGB with 2.2 power function transfer-function.
@@ -116,7 +116,7 @@ colorspaces:
   - !<ColorSpace>
     name: sRGB-texture
     aliases: [sRGB Encoded Rec.709 (sRGB), sRGB - Texture, srgb_encoded_rec709_srgb, srgb_tx, srgb_texture, Input - Generic - sRGB - Texture, Utility - sRGB - Texture]
-    family: Colorspaces
+    family: Utility
     equalitygroup: ""
     bitdepth: unknown
     description: |
@@ -131,7 +131,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Display-P3
-    family: Colorspaces
+    family: Display
     equalitygroup: ""
     bitdepth: unknown
     description: Display P3 2.2 Exponent EOTF Display. For Apple hardware.
@@ -144,7 +144,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: BT.1886
-    family: Colorspaces
+    family: Display
     equalitygroup: ""
     bitdepth: unknown
     description: sRGB primaries, D65 whitepoint and 2.4 Exponent EOTF. Also known as Rec.709.
@@ -230,7 +230,7 @@ colorspaces:
   - !<ColorSpace>
     name: Passthrough
     aliases: [Raw, none, Utility - Raw]
-    family: Colorspaces
+    family: Utility
     equalitygroup: scalar
     bitdepth: 32f
     description: Passthrough means no transformations. Also know as "raw".
@@ -240,7 +240,7 @@ colorspaces:
   - !<ColorSpace>
     name: sRGB-linear
     aliases: [Linear Rec.709 (sRGB), lin_rec709_srgb, lin_rec709, lin_srgb, Utility - Linear - Rec.709, Utility - Linear - sRGB]
-    family: Colorspaces
+    family: Utility
     equalitygroup: ""
     bitdepth: 32f
     description: Standard sRGB colorspace with linear transfer-function.
@@ -250,7 +250,7 @@ colorspaces:
   - !<ColorSpace>
     name: ACEScg
     aliases: [lin_ap1, lin_ap1_scene, ACES - ACEScg]
-    family: Colorspaces
+    family: ACES
     equalitygroup: ""
     bitdepth: 32f
     description: ACES rendering space for CGI. Also known as AP1.
@@ -261,7 +261,7 @@ colorspaces:
   - !<ColorSpace>
     name: ACES2065-1
     aliases: [aces2065_1, aces, ACES - ACES2065-1, lin_ap0, lin_ap0_scene]
-    family: Colorspaces
+    family: ACES
     equalitygroup: ""
     bitdepth: 32f
     description: ACES Interchange format. Also known as AP0.
@@ -272,7 +272,7 @@ colorspaces:
   - !<ColorSpace>
     name: CIE-XYZ-D65
     aliases: [cie_xyz_d65_scene, lin_ciexyzd65_scene, CIE XYZ-D65 - Scene-referred]
-    family: Colorspaces
+    family: Utility
     equalitygroup: ""
     bitdepth: 32f
     description: CIE 1931 Colorspace with a D65 whitepoint.
@@ -283,7 +283,7 @@ colorspaces:
   - !<ColorSpace>
     name: BT.2020-linear
     aliases: [lin_bt2020, lin_rec2020, Linear Rec.2020, Utility - Linear - Rec.2020]
-    family: Colorspaces
+    family: Utility
     equalitygroup: ""
     bitdepth: 32f
     description: |
