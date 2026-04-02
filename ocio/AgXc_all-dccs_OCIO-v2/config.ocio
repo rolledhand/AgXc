@@ -36,7 +36,28 @@ roles:
   texture_paint: sRGB-2.2
 
 file_rules:
-  - !<Rule> {name: Default, colorspace: default}
+  # --- named pattern rules (pipeline naming conventions, highest priority) ---
+  - !<Rule> {name: srgb_tx,       colorspace: sRGB-2.2,       pattern: "*srgb_tx*",       extension: "*"}
+  - !<Rule> {name: srgb_texture,  colorspace: sRGB-2.2,       pattern: "*srgb_texture*",  extension: "*"}
+  - !<Rule> {name: lin_rec709,    colorspace: sRGB-linear,    pattern: "*lin_rec709*",    extension: "*"}
+  - !<Rule> {name: lin_srgb,      colorspace: sRGB-linear,    pattern: "*lin_srgb*",      extension: "*"}
+  - !<Rule> {name: lin_bt2020,    colorspace: BT.2020-linear, pattern: "*lin_bt2020*",    extension: "*"}
+  - !<Rule> {name: acescg,        colorspace: ACEScg,         pattern: "*ACEScg*",        extension: "*"}
+  # --- USD/USDZ embedded texture rules ---
+  - !<Rule> {name: __usdz_jpg,    colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][gg]\\]"}
+  - !<Rule> {name: __usdz_jpeg,   colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][ee][gg]\\]"}
+  - !<Rule> {name: __usdz_png,    colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[pp][nn][gg]\\]"}
+  - !<Rule> {name: __usdz_tif,    colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff]\\]"}
+  - !<Rule> {name: __usdz_tiff,   colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff][ff]\\]"}
+  - !<Rule> {name: __usdz_exr,    colorspace: BT.2020-linear, regex: ".[uu][ss][dd][zz]\\[.*[ee][xx][rr]\\]"}
+  # --- extension fallbacks ---
+  - !<Rule> {name: jpg,           colorspace: sRGB-2.2,       pattern: "*", extension: jpg}
+  - !<Rule> {name: jpeg,          colorspace: sRGB-2.2,       pattern: "*", extension: jpeg}
+  - !<Rule> {name: png,           colorspace: sRGB-2.2,       pattern: "*", extension: png}
+  - !<Rule> {name: tif,           colorspace: sRGB-2.2,       pattern: "*", extension: tif}
+  - !<Rule> {name: tiff,          colorspace: sRGB-2.2,       pattern: "*", extension: tiff}
+  - !<Rule> {name: exr,           colorspace: BT.2020-linear, pattern: "*", extension: exr}
+  - !<Rule> {name: Default,       colorspace: BT.2020-linear}
 
 displays:
   sRGB-2.2:
