@@ -131,7 +131,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Display-P3
-    family: Display
+    family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
     description: Display P3 2.2 Exponent EOTF Display. For Apple hardware.
@@ -144,7 +144,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: BT.1886
-    family: Display
+    family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
     description: sRGB primaries, D65 whitepoint and 2.4 Exponent EOTF. Also known as Rec.709.
@@ -154,7 +154,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: AgXc-log
-    family: AgX
+    family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
     description: AgX Log encoding.
@@ -167,7 +167,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: AgXc.base
-    family: AgX
+    family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
     description: |
@@ -191,7 +191,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: AgXc.softer
-    family: AgX
+    family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
     description: |
@@ -215,7 +215,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: AgXc-tonescale-default
-    family: AgX
+    family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
     description: AgXc 1D curve. Output is linear.
