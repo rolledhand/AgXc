@@ -39,3 +39,7 @@ _outputs/
 *.nknc~
 *.nknc.autosave
 *.nk.autosave
+
+# tweaking
+.DS_Store
+.claude
