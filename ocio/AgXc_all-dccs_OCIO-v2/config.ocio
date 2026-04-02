@@ -37,25 +37,25 @@ roles:
 
 file_rules:
   # --- named pattern rules (pipeline naming conventions, highest priority) ---
-  - !<Rule> {name: srgb_tx,       colorspace: sRGB-2.2,       pattern: "*srgb_tx*",       extension: "*"}
-  - !<Rule> {name: srgb_texture,  colorspace: sRGB-2.2,       pattern: "*srgb_texture*",  extension: "*"}
+  - !<Rule> {name: srgb_tx,       colorspace: sRGB-texture,   pattern: "*srgb_tx*",       extension: "*"}
+  - !<Rule> {name: srgb_texture,  colorspace: sRGB-texture,   pattern: "*srgb_texture*",  extension: "*"}
   - !<Rule> {name: lin_rec709,    colorspace: sRGB-linear,    pattern: "*lin_rec709*",    extension: "*"}
   - !<Rule> {name: lin_srgb,      colorspace: sRGB-linear,    pattern: "*lin_srgb*",      extension: "*"}
   - !<Rule> {name: lin_bt2020,    colorspace: BT.2020-linear, pattern: "*lin_bt2020*",    extension: "*"}
   - !<Rule> {name: acescg,        colorspace: ACEScg,         pattern: "*ACEScg*",        extension: "*"}
   # --- USD/USDZ embedded texture rules ---
-  - !<Rule> {name: __usdz_jpg,    colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][gg]\\]"}
-  - !<Rule> {name: __usdz_jpeg,   colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][ee][gg]\\]"}
-  - !<Rule> {name: __usdz_png,    colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[pp][nn][gg]\\]"}
-  - !<Rule> {name: __usdz_tif,    colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff]\\]"}
-  - !<Rule> {name: __usdz_tiff,   colorspace: sRGB-2.2,       regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff][ff]\\]"}
+  - !<Rule> {name: __usdz_jpg,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][gg]\\]"}
+  - !<Rule> {name: __usdz_jpeg,   colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][ee][gg]\\]"}
+  - !<Rule> {name: __usdz_png,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[pp][nn][gg]\\]"}
+  - !<Rule> {name: __usdz_tif,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff]\\]"}
+  - !<Rule> {name: __usdz_tiff,   colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff][ff]\\]"}
   - !<Rule> {name: __usdz_exr,    colorspace: BT.2020-linear, regex: ".[uu][ss][dd][zz]\\[.*[ee][xx][rr]\\]"}
   # --- extension fallbacks ---
-  - !<Rule> {name: jpg,           colorspace: sRGB-2.2,       pattern: "*", extension: jpg}
-  - !<Rule> {name: jpeg,          colorspace: sRGB-2.2,       pattern: "*", extension: jpeg}
-  - !<Rule> {name: png,           colorspace: sRGB-2.2,       pattern: "*", extension: png}
-  - !<Rule> {name: tif,           colorspace: sRGB-2.2,       pattern: "*", extension: tif}
-  - !<Rule> {name: tiff,          colorspace: sRGB-2.2,       pattern: "*", extension: tiff}
+  - !<Rule> {name: jpg,           colorspace: sRGB-texture,   pattern: "*", extension: jpg}
+  - !<Rule> {name: jpeg,          colorspace: sRGB-texture,   pattern: "*", extension: jpeg}
+  - !<Rule> {name: png,           colorspace: sRGB-texture,   pattern: "*", extension: png}
+  - !<Rule> {name: tif,           colorspace: sRGB-texture,   pattern: "*", extension: tif}
+  - !<Rule> {name: tiff,          colorspace: sRGB-texture,   pattern: "*", extension: tiff}
   - !<Rule> {name: exr,           colorspace: BT.2020-linear, pattern: "*", extension: exr}
   - !<Rule> {name: Default,       colorspace: BT.2020-linear}
 
@@ -104,6 +104,7 @@ looks:
 colorspaces:
   - !<ColorSpace>
     name: sRGB-2.2
+    aliases: [g22_rec709, g22_encoded_rec709, Gamma 2.2 Encoded Rec.709]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
@@ -114,6 +115,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: sRGB-texture
+    aliases: [sRGB Encoded Rec.709 (sRGB), sRGB - Texture, srgb_encoded_rec709_srgb, srgb_tx, srgb_texture, Input - Generic - sRGB - Texture, Utility - sRGB - Texture]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
@@ -227,6 +229,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Passthrough
+    aliases: [Raw, none, Utility - Raw]
     family: Colorspaces
     equalitygroup: scalar
     bitdepth: 32f
@@ -236,6 +239,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: sRGB-linear
+    aliases: [Linear Rec.709 (sRGB), lin_rec709_srgb, lin_rec709, lin_srgb, Utility - Linear - Rec.709, Utility - Linear - sRGB]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
@@ -245,6 +249,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: ACEScg
+    aliases: [lin_ap1, lin_ap1_scene, ACES - ACEScg]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
@@ -255,6 +260,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: ACES2065-1
+    aliases: [aces2065_1, aces, ACES - ACES2065-1, lin_ap0, lin_ap0_scene]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
@@ -265,6 +271,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: CIE-XYZ-D65
+    aliases: [cie_xyz_d65_scene, lin_ciexyzd65_scene, CIE XYZ-D65 - Scene-referred]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
@@ -275,6 +282,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: BT.2020-linear
+    aliases: [lin_bt2020, lin_rec2020, Linear Rec.2020, Utility - Linear - Rec.2020]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
