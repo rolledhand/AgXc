@@ -87,6 +87,12 @@ displays:
 
 active_displays: [sRGB-2.2, Pre-Display]
 active_views: []
+inactive_colorspaces: [Image AgXc.base-Punchy sRGB-2.2, Image AgXc.base-Punchy Display-P3,
+                        Image AgXc.base-Punchy BT.1886, Image AgXc.base sRGB-2.2,
+                        Image AgXc.base Display-P3, Image AgXc.base BT.1886,
+                        Image AgXc.softer-Punchy sRGB-2.2, Image AgXc.softer-Punchy Display-P3,
+                        Image AgXc.softer-Punchy BT.1886, Image AgXc.softer sRGB-2.2,
+                        Image AgXc.softer Display-P3, Image AgXc.softer BT.1886]
 
 looks:
   - !<Look>
