@@ -85,7 +85,7 @@ displays:
     - !<View> {name: AgXc.base, colorspace: AgXc.base}
     - !<View> {name: AgXc.softer, colorspace: AgXc.softer}
 
-active_displays: [sRGB-2.2, Pre-Display]
+active_displays: [sRGB-2.2, Display-P3, BT.1886]
 active_views: []
 inactive_colorspaces: [Image AgXc.base-Punchy sRGB-2.2, Image AgXc.base-Punchy Display-P3,
                         Image AgXc.base-Punchy BT.1886, Image AgXc.base sRGB-2.2,
