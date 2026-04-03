@@ -1,0 +1,231 @@
+ocio_profile_version: 1
+
+search_path: luts:transfer_functions
+strictparsing: true
+luma: [0.2126, 0.7152, 0.0722]
+description: |
+  The OpenDRT OCIO config: https://github.com/jedypod/open-display-transform
+  Generated with ociogen: https://github.com/jedypod/ociogen
+  This OCIO Config and the associated spi1d and cube LUT files are licensed
+  permissively under the MIT License. See LICENSE.md for details.
+
+  Release v2 - 20250410
+    - Fix missing ACES 2065-1 colorspace.
+  Release v1 - 20250406
+    - Initial release.
+
+
+roles:
+  color_picking: Filmlight - E-Gamut2 - Linear
+  color_timing: Filmlight - E-Gamut2 - T-Log
+  compositing_linear: Filmlight - E-Gamut2 - Linear
+  compositing_log: Filmlight - E-Gamut2 - T-Log
+  data: Filmlight - E-Gamut2 - Linear
+  default: Filmlight - E-Gamut2 - Linear
+  matte_paint: Filmlight - E-Gamut2 - T-Log
+  reference: Filmlight - E-Gamut2 - Linear
+  scene_linear: Filmlight - E-Gamut2 - Linear
+  texture_paint: Filmlight - E-Gamut2 - Linear
+
+
+displays:
+  Rec.1886:
+    - !<View> {name: OpenDRT v1.0.0 Default, colorspace: OpenDRT v1.0.0 Default - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Colorful, colorspace: OpenDRT v1.0.0 Colorful - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Umbra, colorspace: OpenDRT v1.0.0 Umbra - Rec.1886}
+    - !<View> {name: Display Encoding, colorspace: Rec.1886}
+    - !<View> {name: Bypass, colorspace: bypass}
+  sRGB Display:
+    - !<View> {name: OpenDRT v1.0.0 Default, colorspace: OpenDRT v1.0.0 Default - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Colorful, colorspace: OpenDRT v1.0.0 Colorful - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Umbra, colorspace: OpenDRT v1.0.0 Umbra - sRGB Display}
+    - !<View> {name: Display Encoding, colorspace: sRGB Display}
+    - !<View> {name: Bypass, colorspace: bypass}
+
+active_displays: [Rec.1886, sRGB Display]
+active_views: [OpenDRT v1.0.0 Default, OpenDRT v1.0.0 Colorful, OpenDRT v1.0.0 Umbra, Display Encoding, Bypass]
+
+colorspaces:
+  - !<ColorSpace>
+    name: bypass
+    family: Working Spaces
+    description: Non-Color Data
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+
+  - !<ColorSpace>
+    name: ACES 2065-1
+    family: Working Spaces
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+    to_reference: !<MatrixTransform> {matrix: [1.25992122474977, -0.180662379244654, -0.0792588455051215, 0, 0.00486107030443775, 0.944082892223335, 0.0510560374722275, 0, 0.121236193720255, 0.0466469429928843, 0.83211686328686, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: ACEScg
+    family: Working Spaces
+    description: |
+      Linear AP1 ACEScg
+      S-2014-004 : ACEScg — A Working Space for CGI Render and Compositing
+      http://j.mp/S-2014-004
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+    to_reference: !<MatrixTransform> {matrix: [0.868560322361992, 0.0216148124030379, 0.10982486523497, 0, 0.0453882935158179, 0.812490156195302, 0.14212155028888, 0, 0.0818053320392553, 0.0605058247267323, 0.857688843234013, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: ACEScct
+    family: Working Spaces
+    description: |
+      ACES AP1 - ACEScct Log
+      S-2016-001 : ACEScct — A Quasi-Logarithmic Encoding of ACES Data for use within Color Grading Systems
+      http://j.mp/S-2016-001_
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: oetf_acescct_to_linear.spi1d, interpolation: linear}
+        - !<ColorSpaceTransform> {src: ACEScg, dst: reference}
+
+  - !<ColorSpace>
+    name: Filmlight - E-Gamut2 - Linear
+    family: Working Spaces
+    description: |
+      Filmlight E-Gamut2 - Linear
+      Specified in the flspace file included with the Baselight software
+      /etc/colourspaces/FilmLight_Linear_EGamut2.flspace
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+
+  - !<ColorSpace>
+    name: Filmlight - E-Gamut2 - T-Log
+    family: Working Spaces
+    description: |
+      Filmlight E-Gamut2 - T-Log
+      Specified in the flspace file included with the Baselight software
+      /etc/colourspaces/FilmLight_Linear_EGamut2.flspace
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: oetf_filmlight_tlog_to_linear.spi1d, interpolation: linear}
+        - !<ColorSpaceTransform> {src: Filmlight - E-Gamut2 - Linear, dst: reference}
+
+  - !<ColorSpace>
+    name: Filmlight - E-Gamut2 - T-LogE
+    family: Working Spaces
+    description: |
+      Filmlight E-Gamut2 - T-LogE
+      Same as T-Log but upper range extended from 128 to 512.
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: oetf_filmlight_tloge_to_linear.spi1d, interpolation: linear}
+        - !<ColorSpaceTransform> {src: Filmlight - E-Gamut2 - Linear, dst: reference}
+
+
+  - !<ColorSpace>
+    name: Rec.709 - Linear
+    family: Working Spaces
+    description: ITU-R Recommendation BT.709 Gamut - Linear
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+    to_reference: !<MatrixTransform> {matrix: [0.536262985012656, 0.327893263016182, 0.135843751971162, 0, 0.0876161624916111, 0.776575466302568, 0.135808371205821, 0, 0.0719637836214984, 0.175027713874039, 0.753008502504462, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Rec.2020 - Linear
+    family: Working Spaces
+    description: ITU-R Recommendation BT.2020 Gamut - Linear
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+    to_reference: !<MatrixTransform> {matrix: [0.847154932080957, 0.0426770378618104, 0.110168030057232, 0, 0.0462979810194084, 0.814635948065727, 0.139066070914865, 0, 0.0840277512305456, 0.0802632339106623, 0.835709014858792, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: P3D65 - Linear
+    family: Working Spaces
+    description: P3 Gamut Linear, with a D65 whitepoint.
+    allocation: lg2
+    allocationvars: [-8, 8, 0.01]
+    to_reference: !<MatrixTransform> {matrix: [0.64043224418677, 0.210374149279206, 0.149193606534025, 0, 0.0719972140091795, 0.778848037217322, 0.149154748773498, 0, 0.0660029515848763, 0.10698768943279, 0.827009358982333, 0, 0, 0, 0, 1]}
+
+  - !<ColorSpace>
+    name: Rec.1886
+    family: Display Spaces
+    description: |
+      Display encoding for a ITU-R Reccomendation BT.1886 display with
+      a 2.4 power funtion EOTF, Rec.709 primaries, a D65 whitepoint, 100 nits peak luminance,
+      and a 5 nits ambient surround illumination level.
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: Rec.709 - Linear}
+        - !<FileTransform> {src: eotf_rec1886_to_linear.spi1d, interpolation: linear, direction: inverse}
+
+  - !<ColorSpace>
+    name: sRGB Display
+    family: Display Spaces
+    description: |
+      sRGB Display with BT.709 primaries and pure 2.2 Power Electrical-Optical Transfer Function (EOTF)
+      Also called "sRGB Display" as proposed by Filmlight
+      https://www.youtube.com/watch?v=NzhUzeNUBuM
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: Rec.709 - Linear}
+        - !<FileTransform> {src: eotf_srgb_to_linear.spi1d, interpolation: linear, direction: inverse}
+
+  - !<ColorSpace>
+    name: sRGB Encoding
+    family: Display Spaces
+    description: |
+      Display encoding for a display which is incorrectly calibrated to use
+      the piecewise sRGB Encoding function as the EOTF.
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: Rec.709 - Linear}
+        - !<FileTransform> {src: eocf_srgb_to_linear.spi1d, interpolation: linear, direction: inverse}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Default - Rec.1886
+    family: Image Formation
+    description: OpenDRT v1.0.0 Default view transform for Rec.1886 display
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: Filmlight - E-Gamut2 - T-LogE}
+        - !<FileTransform> {src: OpenDRT_v1.0.0_Default__filmlight-egamut2-tloge_to_rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Colorful - Rec.1886
+    family: Image Formation
+    description: OpenDRT v1.0.0 Colorful view transform for Rec.1886 display
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: Filmlight - E-Gamut2 - T-LogE}
+        - !<FileTransform> {src: OpenDRT_v1.0.0_Colorful__filmlight-egamut2-tloge_to_rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Umbra - Rec.1886
+    family: Image Formation
+    description: OpenDRT v1.0.0 Umbra view transform for Rec.1886 display
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: Filmlight - E-Gamut2 - T-LogE}
+        - !<FileTransform> {src: OpenDRT_v1.0.0_Umbra__filmlight-egamut2-tloge_to_rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Default - sRGB Display
+    family: Image Formation
+    description: OpenDRT v1.0.0 Default view transform for sRGB Display display
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Default - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Colorful - sRGB Display
+    family: Image Formation
+    description: OpenDRT v1.0.0 Colorful view transform for sRGB Display display
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Colorful - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Umbra - sRGB Display
+    family: Image Formation
+    description: OpenDRT v1.0.0 Umbra view transform for sRGB Display display
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Umbra - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
