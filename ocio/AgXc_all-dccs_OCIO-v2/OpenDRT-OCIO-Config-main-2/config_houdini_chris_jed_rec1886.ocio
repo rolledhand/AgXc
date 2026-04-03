@@ -56,17 +56,25 @@ file_rules:
   - !<Rule> {name: Default,      colorspace: linear}
 
 displays:
-  Rec1886 100 nits video dim:
-    - !<View> {name: OpenDRT Original (Chris), colorspace: openDRT 1.0.0 - Rec.709 - 2.4 Gamma}
-    - !<View> {name: OpenDRT Default (Jed Rec1886), colorspace: openDRT Jed Default - Rec.709 - 2.4 Gamma}
-    - !<View> {name: OpenDRT Colorful (Jed Rec1886), colorspace: openDRT Jed Colorful - Rec.709 - 2.4 Gamma}
-    - !<View> {name: OpenDRT Umbra (Jed Rec1886), colorspace: openDRT Jed Umbra - Rec.709 - 2.4 Gamma}
-    - !<View> {name: Display Encoding, colorspace: rec709_display}
+  Rec.1886:
+    - !<View> {name: OpenDRT v1.0.0 Original (Chris), colorspace: OpenDRT v1.0.0 Original (Chris) - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Default, colorspace: OpenDRT v1.0.0 Default - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Colorful, colorspace: OpenDRT v1.0.0 Colorful - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Umbra, colorspace: OpenDRT v1.0.0 Umbra - Rec.1886}
+    - !<View> {name: Display Encoding, colorspace: Rec.1886}
+    - !<View> {name: Log, colorspace: cineonlog_rec709}
+    - !<View> {name: Raw, colorspace: non-colour data}
+  sRGB Display:
+    - !<View> {name: OpenDRT v1.0.0 Original (Chris), colorspace: OpenDRT v1.0.0 Original (Chris) - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Default, colorspace: OpenDRT v1.0.0 Default - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Colorful, colorspace: OpenDRT v1.0.0 Colorful - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Umbra, colorspace: OpenDRT v1.0.0 Umbra - sRGB Display}
+    - !<View> {name: Display Encoding, colorspace: sRGB Display}
     - !<View> {name: Log, colorspace: cineonlog_rec709}
     - !<View> {name: Raw, colorspace: non-colour data}
 
-active_displays: [Rec1886 100 nits video dim]
-active_views: [OpenDRT Original (Chris), OpenDRT Default (Jed Rec1886), OpenDRT Colorful (Jed Rec1886), OpenDRT Umbra (Jed Rec1886), Display Encoding, Log, Raw]
+active_displays: [Rec.1886, sRGB Display]
+active_views: [OpenDRT v1.0.0 Original (Chris), OpenDRT v1.0.0 Default, OpenDRT v1.0.0 Colorful, OpenDRT v1.0.0 Umbra, Display Encoding, Log, Raw]
 
 ##################################### SCENE-REFERRED ##############################################
 
@@ -133,7 +141,8 @@ colorspaces:
 ##################################### DISPLAY-REFERRED ##############################################
 
   - !<ColorSpace>
-    name: openDRT 1.0.0 - Rec.709 - 2.4 Gamma
+    name: OpenDRT v1.0.0 Original (Chris) - Rec.1886
+    aliases: [openDRT 1.0.0 - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
     description: Original Chris OpenDRT Rec1886 view transform
@@ -147,7 +156,8 @@ colorspaces:
         - !<ColorSpaceTransform> {src: tlog_egamut, dst: lin_xyz}
 
   - !<ColorSpace>
-    name: openDRT Jed Default - Rec.709 - 2.4 Gamma
+    name: OpenDRT v1.0.0 Default - Rec.1886
+    aliases: [openDRT Jed Default - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
     description: Jed OpenDRT Default Rec1886 variant (wired from tlog_egamut)
@@ -157,7 +167,8 @@ colorspaces:
         - !<FileTransform> {src: Jed_OpenDRT_Default_Rec1886.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
-    name: openDRT Jed Colorful - Rec.709 - 2.4 Gamma
+    name: OpenDRT v1.0.0 Colorful - Rec.1886
+    aliases: [openDRT Jed Colorful - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
     description: Jed OpenDRT Colorful Rec1886 variant (wired from tlog_egamut)
@@ -167,7 +178,8 @@ colorspaces:
         - !<FileTransform> {src: Jed_OpenDRT_Colorful_Rec1886.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
-    name: openDRT Jed Umbra - Rec.709 - 2.4 Gamma
+    name: OpenDRT v1.0.0 Umbra - Rec.1886
+    aliases: [openDRT Jed Umbra - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
     description: Jed OpenDRT Umbra Rec1886 variant (wired from tlog_egamut)
@@ -175,6 +187,46 @@ colorspaces:
       children:
         - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
         - !<FileTransform> {src: Jed_OpenDRT_Umbra_Rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Original (Chris) - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Original Chris OpenDRT Rec1886 remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Original (Chris) - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Default - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Default Rec1886 variant remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Default - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Colorful - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Colorful Rec1886 variant remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Colorful - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Umbra - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Umbra Rec1886 variant remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Umbra - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
 
 ############################################## UTILITY ##############################################
 
@@ -190,7 +242,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: srgb_encoding
-    aliases: [sRGB-texture, sRGB Encoded Rec.709 (sRGB), sRGB - Texture, srgb_encoded_rec709_srgb, srgb_tx, Input - Generic - sRGB - Texture, Utility - sRGB - Texture]
+    aliases: [sRGB-texture, sRGB Encoding, sRGB Encoded Rec.709 (sRGB), sRGB - Texture, srgb_encoded_rec709_srgb, srgb_tx, Input - Generic - sRGB - Texture, Utility - sRGB - Texture]
     family: Utility
     bitdepth: 32f
     description: sRGB Piecewise Function - Rec.709 - D65
@@ -202,8 +254,33 @@ colorspaces:
     allocationvars: [0, 1]
 
   - !<ColorSpace>
+    name: Rec.1886
+    family: Utility
+    bitdepth: 32f
+    description: Gamma 2.4 - Rec.709 - D65
+    from_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000], direction: inverse}
+        - !<FileTransform> {src: linear_to_rec1886.spi1d, interpolation: linear}
+    allocation: uniform
+    allocationvars: [0, 1]
+
+  - !<ColorSpace>
+    name: sRGB Display
+    aliases: [srgb_display]
+    family: Utility
+    bitdepth: 32f
+    description: Gamma 2.2 style display encoding over Rec.709 primaries
+    from_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000], direction: inverse}
+        - !<FileTransform> {src: linear_to_sRGB.spi1d, interpolation: linear}
+    allocation: uniform
+    allocationvars: [0, 1]
+
+  - !<ColorSpace>
     name: rec709_display
-    aliases: [Rec.1886, BT.1886, Gamma 2.4 Encoded Rec.709]
+    aliases: [BT.1886, Gamma 2.4 Encoded Rec.709]
     family: Utility
     bitdepth: 32f
     description: Gamma 2.4 - Rec.709 - D65
