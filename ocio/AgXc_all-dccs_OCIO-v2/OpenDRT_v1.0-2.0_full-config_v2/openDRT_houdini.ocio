@@ -257,7 +257,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Arri - WideGamut3 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Arri Wide Gamut - Linear
       https://www.arri.com/resource/blob/31918/66f56e6abb6e5b6553929edf9aa7483e/2017-03-alexa-logc-curve-in-vfx-data.pdf
@@ -267,7 +267,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Arri - WideGamut3 - LogC3
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Arri Wide Gamut - LogCv3 EI800
       https://www.arri.com/resource/blob/31918/66f56e6abb6e5b6553929edf9aa7483e/2017-03-alexa-logc-curve-in-vfx-data.pdf
@@ -278,7 +278,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Arri - WideGamut4 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Arri Wide Gamut 4 - Linear
       https://www.arri.com/resource/blob/278790/bea879ac0d041a925bed27a096ab3ec2/2022-05-arri-logc4-specification-data.pdf
@@ -288,7 +288,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Arri - WideGamut4 - LogC4
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Arri Wide Gamut 4 - LogC4
       https://www.arri.com/resource/blob/278790/bea879ac0d041a925bed27a096ab3ec2/2022-05-arri-logc4-specification-data.pdf
@@ -299,7 +299,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Blackmagic - WideGamut - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Blackmagic Camera Wide Gamut - Linear
       Specified in the Blackmagic Generation 5 Color Science whitepaper included in the Blackmagic Raw SDK available here
@@ -310,7 +310,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Blackmagic - WideGamut - Gen5 Log
-    family: Camera Spaces
+    family: Colorspaces
     description: Blackmagic Wide Gamut - Blackmagic Film Generation 5 Log (OETF)
     to_reference: !<GroupTransform>
       children:
@@ -319,7 +319,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Canon - Cinema Gamut - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Canon Cinema Gamut - Linear
       Note - this is the D55 daylight IDT matrix not the Tungsten IDT
@@ -334,7 +334,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Canon - Cinema Gamut - C-Log2
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Canon CLog2
       CLog2 is intended for grading workflows, whereas CLog3 is intended for a more "direct to display" workflow.
@@ -355,7 +355,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: DJI - D-Gamut - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       DJI D-Gamut - Linear
       https://dl.djicdn.com/downloads/zenmuse+x7/20171010/D-Log_D-Gamut_Whitepaper.pdf
@@ -365,7 +365,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: DJI - D-Gamut - D-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       DJI D-Gamut - D-Log
       https://dl.djicdn.com/downloads/zenmuse+x7/20171010/D-Log_D-Gamut_Whitepaper.pdf
@@ -376,7 +376,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Fujifilm - F-Gamut - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Fujifilm F-Gamut - Linear
       Note - F-Gamut is identical to Rec.2020
@@ -387,7 +387,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Fujifilm - F-Gamut - F-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Fujifilm F-Gamut - F-Log
       https://dl.fujifilm-x.com/support/lut/F-Log_DataSheet_E_Ver.1.0.pdf
@@ -398,7 +398,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Fujifilm - F-Gamut - F-Log2
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Fujifilm F-Gamut - F-Log2
       https://dl.fujifilm-x.com/support/lut/F-Log2_DataSheet_E_Ver.1.0.pdf
@@ -409,7 +409,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Fujifilm - F-GamutC - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Fujifilm F-GamutC - Linear
       https://dl.fujifilm-x.com/support/lut/F-Log2C_DataSheet_E_Ver.1.0.pdf
@@ -419,7 +419,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Fujifilm - F-GamutC - F-Log2
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Fujifilm F-GamutC - F-Log2
       https://dl.fujifilm-x.com/support/lut/F-Log2C_DataSheet_E_Ver.1.0.pdf
@@ -430,7 +430,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Leica - Rec.2020 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Leica Rec.2020 - Linear
       https://leica-camera.com/sites/default/files/pm-65977-210914__L-Log_Reference_Manual_EN.pdf
@@ -440,7 +440,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Leica - Rec.2020 - L-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Leica Rec.2020 - L-Log
       https://leica-camera.com/sites/default/files/pm-65977-210914__L-Log_Reference_Manual_EN.pdf
@@ -451,7 +451,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Nikon - Rec.2020 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Nikon Gamut - Linear
       Note - Nikon Gamut is identical to Rec.2020
@@ -462,7 +462,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Nikon - Rec.2020 - N-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Nikon Gamut - N-Log
       http://download.nikonimglib.com/archive3/hDCmK00m9JDI03RPruD74xpoU905/N-Log_Specification_(En)01.pdf
@@ -473,7 +473,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Apple - Rec.2020 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: Apple - Rec.2020 Linear
     allocation: lg2
     allocationvars: [-8, 8, 0.01]
@@ -481,7 +481,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Apple - Rec.2020 - Apple-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: Apple - Rec.2020 - Apple-Log
     to_reference: !<GroupTransform>
       children:
@@ -490,7 +490,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Samsung - Rec.2020 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: Samsung - Rec.2020 Linear
     allocation: lg2
     allocationvars: [-8, 8, 0.01]
@@ -498,7 +498,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Samsung - Rec.2020 - Samsung-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: Samsung - Rec.2020 - Samsung-Log
     to_reference: !<GroupTransform>
       children:
@@ -507,7 +507,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Xiaomi - Rec.2020 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: Xiaomi - Rec.2020 Linear
     allocation: lg2
     allocationvars: [-8, 8, 0.01]
@@ -515,7 +515,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Xiaomi - Rec.2020 - Xiaomi-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: Xiaomi - Rec.2020 - Xiaomi-Log
     to_reference: !<GroupTransform>
       children:
@@ -524,7 +524,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Panasonic - V-Gamut - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Panasonic V-Gamut - Linear
       https://pro-av.panasonic.net/en/cinema_camera_varicam_eva/support/pdf/VARICAM_V-Log_V-Gamut.pdf
@@ -534,7 +534,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Panasonic - V-Gamut - V-Log
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Panasonic V-Gamut - V-Log
       https://pro-av.panasonic.net/en/cinema_camera_varicam_eva/support/pdf/VARICAM_V-Log_V-Gamut.pdf
@@ -545,7 +545,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Red - WideGamutRGB - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Red Wide Gamut RGB - Linear
       https://docs.red.com/955-0187/PDF/915-0187%20Rev-C%20%20%20RED%20OPS,%20White%20Paper%20on%20REDWideGamutRGB%20and%20Log3G10.pdf
@@ -555,7 +555,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Red - WideGamutRGB - Log3G10
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Red Wide Gamut RGB - Log3G10
       https://docs.red.com/955-0187/PDF/915-0187%20Rev-C%20%20%20RED%20OPS,%20White%20Paper%20on%20REDWideGamutRGB%20and%20Log3G10.pdf
@@ -566,7 +566,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - S-Gamut3 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony S-Gamut3 - Linear
       Note: S-Gamut and S-Gamut3 have identical primaries.
@@ -578,7 +578,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - S-Gamut3 - S-Log3
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony S-Gamut3 - S-Log3
       https://pro.sony/ue_US/support/article/CA000001
@@ -589,7 +589,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - S-Gamut3.Cine - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony S-Gamut3.Cine - Linear
       The Cine variation of S-Gamut3 is more closely aligned to P3 and is more suitable as a grading colorspace.
@@ -599,7 +599,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - S-Gamut3.Cine - S-Log3
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony Venice S-Gamut3.Cine - S-Log3
       https://pro.sony/ue_US/support/article/CA000001
@@ -610,7 +610,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - Venice S-Gamut3 - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony Venice S-Gamut3 - Linear
       RGBW xy Chromaticity coordinates calculated from the AP0 3x3 matrix available here:
@@ -621,7 +621,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - Venice S-Gamut3 - S-Log3
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony Venice S-Gamut3 - S-Log3
       https://pro.sony/ue_US/support/article/CA000001
@@ -632,7 +632,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: Sony - Venice S-Gamut3.Cine - Linear
-    family: Camera Spaces
+    family: Colorspaces
     description: |
       Sony Venice S-Gamut3.Cine - Linear
       RGBW xy Chromaticity coordinates calculated from the AP0 3x3 matrix available here:
@@ -736,7 +736,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Default - Rec.1886
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Default view transform for Rec.1886 display
     from_reference: !<GroupTransform>
       children:
@@ -745,7 +745,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Colorful - Rec.1886
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Colorful view transform for Rec.1886 display
     from_reference: !<GroupTransform>
       children:
@@ -754,7 +754,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Umbra - Rec.1886
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Umbra view transform for Rec.1886 display
     from_reference: !<GroupTransform>
       children:
@@ -763,7 +763,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Default - Display P3
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Default view transform for Display P3 display
     from_reference: !<GroupTransform>
       children:
@@ -772,7 +772,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Colorful - Display P3
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Colorful view transform for Display P3 display
     from_reference: !<GroupTransform>
       children:
@@ -781,7 +781,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Umbra - Display P3
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Umbra view transform for Display P3 display
     from_reference: !<GroupTransform>
       children:
@@ -790,7 +790,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Default - Rec2100 PQ
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Default view transform for Rec2100 PQ display
     from_reference: !<GroupTransform>
       children:
@@ -799,7 +799,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Colorful - Rec2100 PQ
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Colorful view transform for Rec2100 PQ display
     from_reference: !<GroupTransform>
       children:
@@ -808,7 +808,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Umbra - Rec2100 PQ
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Umbra view transform for Rec2100 PQ display
     from_reference: !<GroupTransform>
       children:
@@ -817,7 +817,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Default - sRGB Display
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Default view transform for sRGB Display display
     from_reference: !<GroupTransform>
       children:
@@ -826,7 +826,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Colorful - sRGB Display
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Colorful view transform for sRGB Display display
     from_reference: !<GroupTransform>
       children:
@@ -835,7 +835,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: OpenDRT v1.0.0 Umbra - sRGB Display
-    family: ""
+    family: Colorspaces
     description: OpenDRT v1.0.0 Umbra view transform for sRGB Display display
     from_reference: !<GroupTransform>
       children:
