@@ -51,16 +51,19 @@ displays:
     - !<View> {name: AgX, colorspace: AgX Base}
     - !<View> {name: Appearance Golden, colorspace: Appearance Golden sRGB}
     - !<View> {name: Appearance Punchy, colorspace: Appearance Punchy sRGB}
+    - !<View> {name: Raw, colorspace: Generic Data}
   Display P3:
     - !<View> {name: Display Native, colorspace: Display P3}
     - !<View> {name: AgX, colorspace: AgX Base Display P3}
     - !<View> {name: Appearance Golden, colorspace: Appearance Golden Display P3}
     - !<View> {name: Appearance Punchy, colorspace: Appearance Punchy Display P3}
+    - !<View> {name: Raw, colorspace: Generic Data}
   BT.1886:
     - !<View> {name: Display Native, colorspace: BT.1886}
     - !<View> {name: AgX, colorspace: AgX Base BT.1886}
     - !<View> {name: Appearance Golden, colorspace: Appearance Golden BT.1886}
     - !<View> {name: Appearance Punchy, colorspace: Appearance Punchy BT.1886}
+    - !<View> {name: Raw, colorspace: Generic Data}
 
 active_displays: [sRGB, Display P3, BT.1886]
 active_views: []
