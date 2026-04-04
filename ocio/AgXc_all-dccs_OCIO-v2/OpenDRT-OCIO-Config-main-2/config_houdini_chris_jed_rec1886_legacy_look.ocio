@@ -1,0 +1,317 @@
+# OpenColorIO configuration file for Houdini (Chris-core + Jed variants)
+# Base: OpenDRT-OCIO-Config-main-2/config.ocio
+# Core scene/reference pipeline preserved from Chris config.
+
+ocio_profile_version: 2
+search_path: transforms:looks
+strictparsing: true
+luma: [0.2126, 0.7152, 0.0722]
+
+description: OpenDRT 1.0.0 Chris-core — Legacy Look (Jed cubes driven by T-Log E-Gamut1 / commit 665a7b1 aesthetics)
+
+roles:
+  color_picking: linear
+  color_timing: tlog_egamut
+  compositing_log: tlog_egamut
+  data: non-colour data
+  default: linear
+  default_byte: srgb_encoding
+  matte_paint: cineonlog_rec709
+  rendering: linear
+  scene_linear: linear
+  texture_paint: linear
+  mari_monitor: rec709_display
+  mari_scalar_monitor: rec709_display
+  mari_color_picker: rec709_display
+  mari_working: linear
+  mari_int8: srgb_encoding
+  mari_int16: srgb_encoding
+  mari_int_scalar: non-colour data
+  mari_scalar8: non-colour data
+  mari_float: linear
+  reference: lin_xyz
+  srgb_linear: linear
+  srgb_texture: srgb_encoding
+  substance_3d_painter_standard_srgb: srgb_encoding
+  substance_3d_painter_bitmap_import_8bit: srgb_encoding
+  substance_3d_painter_bitmap_import_16bit: srgb_encoding
+  substance_3d_painter_bitmap_import_floating: linear
+  substance_3d_painter_substance_material: srgb_encoding
+  substance_3d_painter_bitmap_export_8bit: srgb_encoding
+  substance_3d_painter_bitmap_export_16bit: srgb_encoding
+  substance_3d_painter_bitmap_export_floating: linear
+
+file_rules:
+  - !<Rule> {name: srgb_tx,      colorspace: srgb_encoding, pattern: "*srgb_tx*",      extension: "*"}
+  - !<Rule> {name: srgb_texture, colorspace: srgb_encoding, pattern: "*srgb_texture*", extension: "*"}
+  - !<Rule> {name: lin_rec709,   colorspace: linear,        pattern: "*lin_rec709*",   extension: "*"}
+  - !<Rule> {name: lin_srgb,     colorspace: linear,        pattern: "*lin_srgb*",     extension: "*"}
+  - !<Rule> {name: acescg,       colorspace: acescg,        pattern: "*ACEScg*",       extension: "*"}
+  - !<Rule> {name: aces2065,     colorspace: aces,          pattern: "*aces2065*",     extension: "*"}
+  - !<Rule> {name: rough,    colorspace: non-colour data, pattern: "*rough*",    extension: "*"}
+  - !<Rule> {name: metal,    colorspace: non-colour data, pattern: "*metal*",    extension: "*"}
+  - !<Rule> {name: normal,   colorspace: non-colour data, pattern: "*normal*",   extension: "*"}
+  - !<Rule> {name: bump,     colorspace: non-colour data, pattern: "*bump*",     extension: "*"}
+  - !<Rule> {name: ao,       colorspace: non-colour data, pattern: "*_ao*",      extension: "*"}
+  - !<Rule> {name: height,   colorspace: non-colour data, pattern: "*height*",   extension: "*"}
+  - !<Rule> {name: mask,     colorspace: non-colour data, pattern: "*mask*",     extension: "*"}
+  - !<Rule> {name: opacity,  colorspace: non-colour data, pattern: "*opac*",     extension: "*"}
+  - !<Rule> {name: displace, colorspace: non-colour data, pattern: "*displace*", extension: "*"}
+  - !<Rule> {name: jpg,          colorspace: srgb_encoding, pattern: "*",              extension: jpg}
+  - !<Rule> {name: jpeg,         colorspace: srgb_encoding, pattern: "*",              extension: jpeg}
+  - !<Rule> {name: png,          colorspace: srgb_encoding, pattern: "*",              extension: png}
+  - !<Rule> {name: tif,          colorspace: srgb_encoding, pattern: "*",              extension: tif}
+  - !<Rule> {name: tiff,         colorspace: srgb_encoding, pattern: "*",              extension: tiff}
+  - !<Rule> {name: exr,          colorspace: linear,        pattern: "*",              extension: exr}
+  - !<Rule> {name: Default,      colorspace: linear}
+
+displays:
+  Rec.1886:
+    - !<View> {name: OpenDRT v1.0.0 Original (Chris), colorspace: OpenDRT v1.0.0 Original (Chris) - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Default, colorspace: OpenDRT v1.0.0 Default - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Colorful, colorspace: OpenDRT v1.0.0 Colorful - Rec.1886}
+    - !<View> {name: OpenDRT v1.0.0 Umbra, colorspace: OpenDRT v1.0.0 Umbra - Rec.1886}
+    - !<View> {name: Display Encoding, colorspace: Rec.1886}
+    - !<View> {name: Log, colorspace: cineonlog_rec709}
+    - !<View> {name: Raw, colorspace: non-colour data}
+  sRGB Display:
+    - !<View> {name: OpenDRT v1.0.0 Original (Chris), colorspace: OpenDRT v1.0.0 Original (Chris) - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Default, colorspace: OpenDRT v1.0.0 Default - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Colorful, colorspace: OpenDRT v1.0.0 Colorful - sRGB Display}
+    - !<View> {name: OpenDRT v1.0.0 Umbra, colorspace: OpenDRT v1.0.0 Umbra - sRGB Display}
+    - !<View> {name: Display Encoding, colorspace: sRGB Display}
+    - !<View> {name: Log, colorspace: cineonlog_rec709}
+    - !<View> {name: Raw, colorspace: non-colour data}
+
+active_displays: [Rec.1886, sRGB Display]
+active_views: [OpenDRT v1.0.0 Original (Chris), OpenDRT v1.0.0 Default, OpenDRT v1.0.0 Colorful, OpenDRT v1.0.0 Umbra, Display Encoding, Log, Raw]
+
+##################################### SCENE-REFERRED ##############################################
+
+colorspaces:
+  - !<ColorSpace>
+    name: linear
+    aliases: [lin_rec709, lin_srgb, lin_rec709_srgb, Linear Rec.709 (sRGB), Utility - Linear - Rec.709, Utility - Linear - sRGB]
+    family: SceneReferred
+    bitdepth: 32f
+    description: Linear - Rec.709 - D65
+    to_reference: !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000]}
+    allocation: lg2
+    allocationvars: [-10, 7, 0.0056065625]
+
+  - !<ColorSpace>
+    name: cineonlog_rec709
+    family: SceneReferred
+    bitdepth: 32f
+    description: Cineon Log - Rec.709 - D65
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: CineonLog_2_Linear.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000]}
+
+  - !<ColorSpace>
+    name: tlog_egamut
+    family: SceneReferred
+    bitdepth: 32f
+    description: FilmLight - T-Log - E-Gamut - D65
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: TLog_2_Linear.spi1d, interpolation: linear}
+        - !<MatrixTransform> {matrix: [0.7421668170, 0.1725922514, 0.0852409316, 0.0000000000, 0.2801307241, 0.8202066415, -0.1003373656, 0.0000000000, -0.0952947734, -0.0669452625, 1.1622400359, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000]}
+
+  - !<ColorSpace>
+    name: lin_xyz
+    aliases: [CIE-XYZ-D65, cie_xyz_d65_scene]
+    family: SceneReferred
+    bitdepth: 32f
+    description: CIE - Linear - XYZ - D65
+    allocation: lg2
+    allocationvars: [-10, 7, 0.0056065625]
+
+  - !<ColorSpace>
+    name: aces
+    aliases: [aces2065_1, ACES - ACES2065-1, lin_ap0, lin_ap0_scene]
+    family: SceneReferred
+    bitdepth: 32f
+    description: ACES 2065-1 - Linear - AP0 - ACES White Point (~D60)
+    to_reference: !<MatrixTransform> {matrix: [0.9875586253, -0.0060412276, 0.0184826022, 0.0000000000, 0.3380935950, 0.7272139028, -0.0653074978, 0.0000000000, 0.0006639882, 0.0007515137, 0.9985844981, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000]}
+    allocation: lg2
+    allocationvars: [-10, 7, 0.0056065625]
+
+  - !<ColorSpace>
+    name: acescg
+    aliases: [lin_ap1, lin_ap1_scene, ACES - ACEScg]
+    family: SceneReferred
+    bitdepth: 32f
+    description: ACEScg - Linear - AP1 - ACES White Point (~D60)
+    to_reference: !<MatrixTransform> {matrix: [0.6864271126, 0.1338093876, 0.1797634998, 0.0000000000, 0.2680640592, 0.6724644790, 0.0594714618, 0.0000000000, -0.0050226248, 0.0047589763, 1.0002636486, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000]}
+    allocation: lg2
+    allocationvars: [-10, 7, 0.0056065625]
+
+##################################### DISPLAY-REFERRED ##############################################
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Original (Chris) - Rec.1886
+    aliases: [openDRT 1.0.0 - Rec.709 - 2.4 Gamma]
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Original Chris OpenDRT Rec1886 view transform
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<FileTransform> {src: OpenDRT_Default_v1.0.0_tlog-egamut_to_Rec1886.cube, interpolation: tetrahedral}
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: OpenDRT_Default_v1.0.0_tlog-egamut_to_Rec1886_inverse.cube, interpolation: tetrahedral}
+        - !<ColorSpaceTransform> {src: tlog_egamut, dst: lin_xyz}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Default - Rec.1886
+    aliases: [openDRT Jed Default - Rec.709 - 2.4 Gamma]
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Default Rec1886 variant (T-Log E-Gamut1 input — legacy look)
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<FileTransform> {src: Jed_OpenDRT_Default_Rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Colorful - Rec.1886
+    aliases: [openDRT Jed Colorful - Rec.709 - 2.4 Gamma]
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Colorful Rec1886 variant (T-Log E-Gamut1 input — legacy look)
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<FileTransform> {src: Jed_OpenDRT_Colorful_Rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Umbra - Rec.1886
+    aliases: [openDRT Jed Umbra - Rec.709 - 2.4 Gamma]
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Umbra Rec1886 variant (T-Log E-Gamut1 input — legacy look)
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<FileTransform> {src: Jed_OpenDRT_Umbra_Rec1886.cube, interpolation: tetrahedral}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Original (Chris) - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Original Chris OpenDRT Rec1886 remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Original (Chris) - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Default - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Default Rec1886 variant remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Default - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Colorful - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Colorful Rec1886 variant remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Colorful - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+  - !<ColorSpace>
+    name: OpenDRT v1.0.0 Umbra - sRGB Display
+    family: DisplayReferred
+    bitdepth: 32f
+    description: Jed OpenDRT Umbra Rec1886 variant remapped to sRGB Display encoding
+    from_reference: !<GroupTransform>
+      children:
+        - !<ColorSpaceTransform> {src: reference, dst: OpenDRT v1.0.0 Umbra - Rec.1886}
+        - !<ColorSpaceTransform> {src: Rec.1886, dst: sRGB Display}
+
+############################################## UTILITY ##############################################
+
+  - !<ColorSpace>
+    name: non-colour data
+    aliases: [Raw, Passthrough, Utility - Raw]
+    family: Utility
+    bitdepth: 32f
+    description: No operation
+    isdata: true
+    allocation: uniform
+    allocationvars: [0, 1]
+
+  - !<ColorSpace>
+    name: srgb_encoding
+    aliases: [sRGB-texture, sRGB Encoding, sRGB Encoded Rec.709 (sRGB), sRGB - Texture, srgb_encoded_rec709_srgb, srgb_tx, Input - Generic - sRGB - Texture, Utility - sRGB - Texture]
+    family: Utility
+    bitdepth: 32f
+    description: sRGB Piecewise Function - Rec.709 - D65
+    from_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000], direction: inverse}
+        - !<FileTransform> {src: linear_to_sRGB.spi1d, interpolation: linear}
+    allocation: uniform
+    allocationvars: [0, 1]
+
+  - !<ColorSpace>
+    name: Rec.1886
+    family: Utility
+    bitdepth: 32f
+    description: Gamma 2.4 - Rec.709 - D65
+    from_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000], direction: inverse}
+        - !<FileTransform> {src: linear_to_rec1886.spi1d, interpolation: linear}
+    allocation: uniform
+    allocationvars: [0, 1]
+
+  - !<ColorSpace>
+    name: sRGB Display
+    aliases: [srgb_display]
+    family: Utility
+    bitdepth: 32f
+    description: Gamma 2.2 style display encoding over Rec.709 primaries
+    from_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000], direction: inverse}
+        - !<FileTransform> {src: linear_to_sRGB.spi1d, interpolation: linear}
+    allocation: uniform
+    allocationvars: [0, 1]
+
+  - !<ColorSpace>
+    name: rec709_display
+    aliases: [BT.1886, Gamma 2.4 Encoded Rec.709]
+    family: Utility
+    bitdepth: 32f
+    description: Gamma 2.4 - Rec.709 - D65
+    from_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.4338873456, 0.3762240091, 0.1898886453, 0.0000000000, 0.2126390059, 0.7151686788, 0.0721923154, 0.0000000000, 0.0177500401, 0.1094476209, 0.8728023391, 0.0000000000, 0.0000000000, 0.0000000000, 0.0000000000, 1.0000000000], direction: inverse}
+        - !<FileTransform> {src: linear_to_rec1886.spi1d, interpolation: linear}
+    allocation: uniform
+    allocationvars: [0, 1]
+
+######################################## LOOKS ######################################################
+
+looks:
+  - !<Look>
+    name: Contrast CDL
+    process_space: linear
+    description: A contrast boost using a CDL transform
+    transform: !<CDLTransform> {slope: [1.3, 1.3, 1.3], power: [1.2, 1.2, 1.2], sat: 1}
+
+  - !<Look>
+    name: Warmy CDL
+    process_space: linear
+    description: A slightly washed out and warm CDL transform
+    transform: !<CDLTransform> {slope: [1.2, 1, 0.8], power: [0.9, 0.9, 0.9], sat: 1.2}
