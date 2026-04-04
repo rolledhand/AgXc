@@ -15,6 +15,7 @@ roles:
   compositing_log: tlog_egamut
   data: non-colour data
   default: linear
+  default_byte: srgb_encoding
   matte_paint: cineonlog_rec709
   rendering: linear
   scene_linear: linear
@@ -47,6 +48,15 @@ file_rules:
   - !<Rule> {name: lin_srgb,     colorspace: linear,        pattern: "*lin_srgb*",     extension: "*"}
   - !<Rule> {name: acescg,       colorspace: acescg,        pattern: "*ACEScg*",       extension: "*"}
   - !<Rule> {name: aces2065,     colorspace: aces,          pattern: "*aces2065*",     extension: "*"}
+  - !<Rule> {name: rough,    colorspace: non-colour data, pattern: "*rough*",    extension: "*"}
+  - !<Rule> {name: metal,    colorspace: non-colour data, pattern: "*metal*",    extension: "*"}
+  - !<Rule> {name: normal,   colorspace: non-colour data, pattern: "*normal*",   extension: "*"}
+  - !<Rule> {name: bump,     colorspace: non-colour data, pattern: "*bump*",     extension: "*"}
+  - !<Rule> {name: ao,       colorspace: non-colour data, pattern: "*_ao*",      extension: "*"}
+  - !<Rule> {name: height,   colorspace: non-colour data, pattern: "*height*",   extension: "*"}
+  - !<Rule> {name: mask,     colorspace: non-colour data, pattern: "*mask*",     extension: "*"}
+  - !<Rule> {name: opacity,  colorspace: non-colour data, pattern: "*opac*",     extension: "*"}
+  - !<Rule> {name: displace, colorspace: non-colour data, pattern: "*displace*", extension: "*"}
   - !<Rule> {name: jpg,          colorspace: srgb_encoding, pattern: "*",              extension: jpg}
   - !<Rule> {name: jpeg,         colorspace: srgb_encoding, pattern: "*",              extension: jpeg}
   - !<Rule> {name: png,          colorspace: srgb_encoding, pattern: "*",              extension: png}
@@ -138,6 +148,26 @@ colorspaces:
     allocation: lg2
     allocationvars: [-10, 7, 0.0056065625]
 
+  - !<ColorSpace>
+    name: lin_egamut2
+    family: SceneReferred
+    bitdepth: 32f
+    description: Filmlight E-Gamut2 - Linear. Bridge space for Jed OpenDRT cubes.
+    to_reference: !<GroupTransform>
+      children:
+        - !<MatrixTransform> {matrix: [0.536262985012656, 0.327893263016182, 0.135843751971162, 0, 0.0876161624916111, 0.776575466302568, 0.135808371205821, 0, 0.0719637836214984, 0.175027713874039, 0.753008502504462, 0, 0, 0, 0, 1], direction: inverse}
+        - !<ColorSpaceTransform> {src: linear, dst: reference}
+
+  - !<ColorSpace>
+    name: tlog_egamut2
+    family: SceneReferred
+    bitdepth: 32f
+    description: Filmlight E-Gamut2 - T-LogE. Input space for Jed OpenDRT v1.0.0 cubes.
+    to_reference: !<GroupTransform>
+      children:
+        - !<FileTransform> {src: oetf_filmlight_tloge_to_linear.spi1d, interpolation: linear}
+        - !<ColorSpaceTransform> {src: lin_egamut2, dst: reference}
+
 ##################################### DISPLAY-REFERRED ##############################################
 
   - !<ColorSpace>
@@ -160,10 +190,10 @@ colorspaces:
     aliases: [openDRT Jed Default - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
-    description: Jed OpenDRT Default Rec1886 variant (wired from tlog_egamut)
+    description: Jed OpenDRT Default Rec1886 variant (E-Gamut2 T-LogE input)
     from_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut2}
         - !<FileTransform> {src: Jed_OpenDRT_Default_Rec1886.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
@@ -171,10 +201,10 @@ colorspaces:
     aliases: [openDRT Jed Colorful - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
-    description: Jed OpenDRT Colorful Rec1886 variant (wired from tlog_egamut)
+    description: Jed OpenDRT Colorful Rec1886 variant (E-Gamut2 T-LogE input)
     from_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut2}
         - !<FileTransform> {src: Jed_OpenDRT_Colorful_Rec1886.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
@@ -182,10 +212,10 @@ colorspaces:
     aliases: [openDRT Jed Umbra - Rec.709 - 2.4 Gamma]
     family: DisplayReferred
     bitdepth: 32f
-    description: Jed OpenDRT Umbra Rec1886 variant (wired from tlog_egamut)
+    description: Jed OpenDRT Umbra Rec1886 variant (E-Gamut2 T-LogE input)
     from_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut}
+        - !<ColorSpaceTransform> {src: lin_xyz, dst: tlog_egamut2}
         - !<FileTransform> {src: Jed_OpenDRT_Umbra_Rec1886.cube, interpolation: tetrahedral}
 
   - !<ColorSpace>
