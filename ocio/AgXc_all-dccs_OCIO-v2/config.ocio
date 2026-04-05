@@ -66,7 +66,6 @@ displays:
     - !<View> {name: AgXc.softer Punchy, colorspace: Image AgXc.softer-Punchy sRGB-2.2}
     - !<View> {name: AgXc.softer, colorspace: Image AgXc.softer sRGB-2.2}
     - !<View> {name: Disabled, colorspace: Passthrough}
-    - !<View> {name: Raw, colorspace: Passthrough}
     - !<View> {name: Display Native, colorspace: sRGB-2.2}
   Display-P3:
     - !<View> {name: AgXc.base Punchy, colorspace: Image AgXc.base-Punchy Display-P3}
@@ -74,7 +73,6 @@ displays:
     - !<View> {name: AgXc.softer Punchy, colorspace: Image AgXc.softer-Punchy Display-P3}
     - !<View> {name: AgXc.softer, colorspace: Image AgXc.softer Display-P3}
     - !<View> {name: Disabled, colorspace: Passthrough}
-    - !<View> {name: Raw, colorspace: Passthrough}
     - !<View> {name: Display Native, colorspace: Display-P3}
   BT.1886:
     - !<View> {name: AgXc.base Punchy, colorspace: Image AgXc.base-Punchy BT.1886}
@@ -82,7 +80,6 @@ displays:
     - !<View> {name: AgXc.softer Punchy, colorspace: Image AgXc.softer-Punchy BT.1886}
     - !<View> {name: AgXc.softer, colorspace: Image AgXc.softer BT.1886}
     - !<View> {name: Disabled, colorspace: Passthrough}
-    - !<View> {name: Raw, colorspace: Passthrough}
     - !<View> {name: Display Native, colorspace: BT.1886}
   Pre-Display:
     - !<View> {name: AgXc.base, colorspace: AgXc.base}
