@@ -27,13 +27,13 @@ roles:
   compositing_log: AgXc-log
   data: Passthrough
   default: sRGB-2.2
-  default_byte: sRGB-2.2
+  default_byte: sRGB-texture
   default_float: sRGB-linear
   default_sequencer: BT.2020-linear
   matte_paint: sRGB-2.2
   reference: sRGB-linear
   scene_linear: BT.2020-linear
-  texture_paint: sRGB-2.2
+  texture_paint: sRGB-texture
 
 file_rules:
   # --- named pattern rules (pipeline naming conventions, highest priority) ---
