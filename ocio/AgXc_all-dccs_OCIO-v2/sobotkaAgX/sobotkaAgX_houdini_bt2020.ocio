@@ -22,7 +22,7 @@ roles:
   color_timing: sRGB-texture
   compositing_log: AgX Log (Kraken)
   data: Generic Data
-  default: sRGB-texture
+  default: BT.2020-linear
   default_byte: sRGB-texture
   default_float: BT.2020-linear
   default_sequencer: BT.2020-linear
@@ -36,7 +36,8 @@ file_rules:
   - !<Rule> {name: srgb_texture, colorspace: sRGB-texture,   pattern: "*srgb_texture*", extension: "*"}
   - !<Rule> {name: lin_rec709,   colorspace: Linear BT.709,  pattern: "*lin_rec709*",   extension: "*"}
   - !<Rule> {name: lin_srgb,     colorspace: Linear BT.709,  pattern: "*lin_srgb*",     extension: "*"}
-  - !<Rule> {name: lin_bt2020,   colorspace: BT.2020-linear, pattern: "*lin_bt2020*",   extension: "*"}
+  - !<Rule> {name: lin_rec2020, colorspace: BT.2020-linear, pattern: "*lin_rec2020*", extension: "*"}
+  - !<Rule> {name: lin_rec2020_legacy, colorspace: BT.2020-linear, pattern: "*lin_bt2020*", extension: "*"}
   - !<Rule> {name: acescg,       colorspace: ACEScg,         pattern: "*ACEScg*",       extension: "*"}
   - !<Rule> {name: jpg,          colorspace: sRGB-texture,   pattern: "*",              extension: jpg}
   - !<Rule> {name: jpeg,         colorspace: sRGB-texture,   pattern: "*",              extension: jpeg}

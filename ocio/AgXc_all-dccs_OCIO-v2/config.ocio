@@ -41,8 +41,8 @@ file_rules:
   - !<Rule> {name: srgb_texture,  colorspace: sRGB-texture,   pattern: "*srgb_texture*",  extension: "*"}
   - !<Rule> {name: lin_rec709,    colorspace: sRGB-linear,    pattern: "*lin_rec709*",    extension: "*"}
   - !<Rule> {name: lin_srgb,      colorspace: sRGB-linear,    pattern: "*lin_srgb*",      extension: "*"}
-  - !<Rule> {name: lin_rec2020,   colorspace: BT.2020-linear, pattern: "*lin_rec2020*",   extension: "*"}
-  - !<Rule> {name: lin_rec2020_legacy, colorspace: BT.2020-linear, pattern: "*lin_bt2020*", extension: "*"}
+  - !<Rule> {name: lin_rec2020, colorspace: BT.2020-linear, pattern: "*lin_rec2020*", extension: "*"}
+  - !<Rule> {name: lin_bt2020,  colorspace: BT.2020-linear, pattern: "*lin_bt2020*",  extension: "*"}
   - !<Rule> {name: acescg,        colorspace: ACEScg,         pattern: "*ACEScg*",        extension: "*"}
   # --- USD/USDZ embedded texture rules ---
   - !<Rule> {name: __usdz_jpg,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][gg]\\]"}
