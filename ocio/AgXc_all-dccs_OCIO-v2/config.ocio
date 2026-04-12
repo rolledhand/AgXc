@@ -22,26 +22,27 @@ description: |
 roles:
   aces_interchange: ACES2065-1
   cie_xyz_d65_interchange: CIE-XYZ-D65
-  color_picking: BT.2020-linear
+  color_picking: Linear Rec.2020
   color_timing: sRGB-2.2
-  compositing_log: AgXc-log
-  data: Passthrough
-  default: BT.2020-linear
+  compositing_log: AgXc Log
+  data: Raw
+  default: Linear Rec.2020
   default_byte: sRGB-texture
-  default_float: sRGB-linear
-  default_sequencer: BT.2020-linear
+  default_float: Linear Rec.709 (sRGB)
+  default_sequencer: Linear Rec.2020
   matte_paint: sRGB-2.2
-  reference: sRGB-linear
-  scene_linear: BT.2020-linear
+  reference: Linear Rec.709 (sRGB)
+  scene_linear: Linear Rec.2020
   texture_paint: sRGB-texture
 
 file_rules:
   # --- named pattern rules (pipeline naming conventions, highest priority) ---
   - !<Rule> {name: srgb_tx,       colorspace: sRGB-texture,   pattern: "*srgb_tx*",       extension: "*"}
   - !<Rule> {name: srgb_texture,  colorspace: sRGB-texture,   pattern: "*srgb_texture*",  extension: "*"}
-  - !<Rule> {name: lin_rec709,    colorspace: sRGB-linear,    pattern: "*lin_rec709*",    extension: "*"}
-  - !<Rule> {name: lin_srgb,      colorspace: sRGB-linear,    pattern: "*lin_srgb*",      extension: "*"}
-  - !<Rule> {name: lin_bt2020,    colorspace: BT.2020-linear, pattern: "*lin_bt2020*",    extension: "*"}
+  - !<Rule> {name: lin_rec709,    colorspace: Linear Rec.709 (sRGB),    pattern: "*lin_rec709*",    extension: "*"}
+  - !<Rule> {name: lin_srgb,      colorspace: Linear Rec.709 (sRGB),    pattern: "*lin_srgb*",      extension: "*"}
+  - !<Rule> {name: lin_rec2020,   colorspace: Linear Rec.2020, pattern: "*lin_rec2020*",   extension: "*"}
+  - !<Rule> {name: lin_rec2020_legacy, colorspace: Linear Rec.2020, pattern: "*lin_bt2020*", extension: "*"}
   - !<Rule> {name: acescg,        colorspace: ACEScg,         pattern: "*ACEScg*",        extension: "*"}
   # --- USD/USDZ embedded texture rules ---
   - !<Rule> {name: __usdz_jpg,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[jj][pp][gg]\\]"}
@@ -49,58 +50,58 @@ file_rules:
   - !<Rule> {name: __usdz_png,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[pp][nn][gg]\\]"}
   - !<Rule> {name: __usdz_tif,    colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff]\\]"}
   - !<Rule> {name: __usdz_tiff,   colorspace: sRGB-texture,   regex: ".[uu][ss][dd][zz]\\[.*[tt][ii][ff][ff]\\]"}
-  - !<Rule> {name: __usdz_exr,    colorspace: BT.2020-linear, regex: ".[uu][ss][dd][zz]\\[.*[ee][xx][rr]\\]"}
+  - !<Rule> {name: __usdz_exr,    colorspace: Linear Rec.2020, regex: ".[uu][ss][dd][zz]\\[.*[ee][xx][rr]\\]"}
   # --- extension fallbacks ---
   - !<Rule> {name: jpg,           colorspace: sRGB-texture,   pattern: "*", extension: jpg}
   - !<Rule> {name: jpeg,          colorspace: sRGB-texture,   pattern: "*", extension: jpeg}
   - !<Rule> {name: png,           colorspace: sRGB-texture,   pattern: "*", extension: png}
   - !<Rule> {name: tif,           colorspace: sRGB-texture,   pattern: "*", extension: tif}
   - !<Rule> {name: tiff,          colorspace: sRGB-texture,   pattern: "*", extension: tiff}
-  - !<Rule> {name: exr,           colorspace: BT.2020-linear, pattern: "*", extension: exr}
-  - !<Rule> {name: Default,       colorspace: BT.2020-linear}
+  - !<Rule> {name: exr,           colorspace: Linear Rec.2020, pattern: "*", extension: exr}
+  - !<Rule> {name: Default,       colorspace: Linear Rec.2020}
 
 displays:
-  sRGB-2.2:
-    - !<View> {name: AgXc.base Punchy, colorspace: Image AgXc.base-Punchy sRGB-2.2}
-    - !<View> {name: AgXc.base Punchy - custom, colorspace: Image AgXc.base-Punchy-custom sRGB-2.2}
-    - !<View> {name: AgXc.base, colorspace: Image AgXc.base sRGB-2.2}
-    - !<View> {name: AgXc.base - custom, colorspace: Image AgXc.base-custom sRGB-2.2}
-    - !<View> {name: AgXc.softer Punchy, colorspace: Image AgXc.softer-Punchy sRGB-2.2}
-    - !<View> {name: AgXc.softer Punchy - custom, colorspace: Image AgXc.softer-Punchy-custom sRGB-2.2}
-    - !<View> {name: AgXc.softer, colorspace: Image AgXc.softer sRGB-2.2}
-    - !<View> {name: AgXc.softer - custom, colorspace: Image AgXc.softer-custom sRGB-2.2}
-    - !<View> {name: Disabled, colorspace: Passthrough}
-    - !<View> {name: Display Native, colorspace: sRGB-2.2}
-active_displays: [sRGB-2.2]
+  sRGB - Display:
+    - !<View> {name: AgXc Base - Punchy, colorspace: AgXc Base - Punchy - sRGB - Display}
+    - !<View> {name: AgXc Base - Punchy - Custom, colorspace: AgXc Base - Punchy - Custom - sRGB - Display}
+    - !<View> {name: AgXc Base, colorspace: AgXc Base - sRGB - Display}
+    - !<View> {name: AgXc Base - Custom, colorspace: AgXc Base - Custom - sRGB - Display}
+    - !<View> {name: AgXc Softer - Punchy, colorspace: AgXc Softer - Punchy - sRGB - Display}
+    - !<View> {name: AgXc Softer - Punchy - Custom, colorspace: AgXc Softer - Punchy - Custom - sRGB - Display}
+    - !<View> {name: AgXc Softer, colorspace: AgXc Softer - sRGB - Display}
+    - !<View> {name: AgXc Softer - Custom, colorspace: AgXc Softer - Custom - sRGB - Display}
+    - !<View> {name: Raw, colorspace: Raw}
+    - !<View> {name: Display Encoding, colorspace: sRGB-2.2}
+active_displays: [sRGB - Display]
 active_views: []
-inactive_colorspaces: [Image AgXc.base-Punchy sRGB-2.2, Image AgXc.base-Punchy Display-P3,
-                        Image AgXc.base-Punchy BT.1886, Image AgXc.base sRGB-2.2,
-                        Image AgXc.base Display-P3, Image AgXc.base BT.1886,
-                        Image AgXc.base-Punchy-custom sRGB-2.2, Image AgXc.base-Punchy-custom Display-P3,
-                        Image AgXc.base-Punchy-custom BT.1886, Image AgXc.base-custom sRGB-2.2,
-                        Image AgXc.base-custom Display-P3, Image AgXc.base-custom BT.1886,
-                        Image AgXc.softer-Punchy sRGB-2.2, Image AgXc.softer-Punchy Display-P3,
-                        Image AgXc.softer-Punchy BT.1886, Image AgXc.softer-custom sRGB-2.2,
-                        Image AgXc.softer-custom Display-P3, Image AgXc.softer-custom BT.1886,
-                        Image AgXc.softer-Punchy-custom sRGB-2.2, Image AgXc.softer-Punchy-custom Display-P3,
-                        Image AgXc.softer-Punchy-custom BT.1886, Image AgXc.softer sRGB-2.2,
-                        Image AgXc.softer Display-P3, Image AgXc.softer BT.1886]
+inactive_colorspaces: [AgXc Base - Punchy - sRGB - Display, AgXc Base - Punchy - Display P3 - Display,
+                        AgXc Base - Punchy - Rec.1886 - Display, AgXc Base - sRGB - Display,
+                        AgXc Base - Display P3 - Display, AgXc Base - Rec.1886 - Display,
+                        AgXc Base - Punchy - Custom - sRGB - Display, AgXc Base - Punchy - Custom - Display P3 - Display,
+                        AgXc Base - Punchy - Custom - Rec.1886 - Display, AgXc Base - Custom - sRGB - Display,
+                        AgXc Base - Custom - Display P3 - Display, AgXc Base - Custom - Rec.1886 - Display,
+                        AgXc Softer - Punchy - sRGB - Display, AgXc Softer - Punchy - Display P3 - Display,
+                        AgXc Softer - Punchy - Rec.1886 - Display, AgXc Softer - Custom - sRGB - Display,
+                        AgXc Softer - Custom - Display P3 - Display, AgXc Softer - Custom - Rec.1886 - Display,
+                        AgXc Softer - Punchy - Custom - sRGB - Display, AgXc Softer - Punchy - Custom - Display P3 - Display,
+                        AgXc Softer - Punchy - Custom - Rec.1886 - Display, AgXc Softer - sRGB - Display,
+                        AgXc Softer - Display P3 - Display, AgXc Softer - Rec.1886 - Display]
 
 looks:
   - !<Look>
     name: Punchy
-    process_space: BT.2020-linear
+    process_space: Linear Rec.2020
     description: A punchy and more chroma laden look.
     transform: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc-log}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Log}
         - !<FileTransform> {src: saturation-max-2.cube, interpolation: tetrahedral}
         - !<CDLTransform> {slope: [1.01, 1.01, 1.01], offset: [0.038, 0.038, 0.038], power: [1.24, 1.24, 1.24]}
-        - !<ColorSpaceTransform> {src: AgXc-log, dst: reference}
+        - !<ColorSpaceTransform> {src: AgXc Log, dst: reference}
 
   - !<Look>
     name: CustomCDL
-    process_space: BT.2020-linear
+    process_space: Linear Rec.2020
     description: Reusable custom CDL stack.
     transform: !<GroupTransform>
       children:
@@ -161,7 +162,8 @@ colorspaces:
     from_scene_reference: !<ExponentTransform> {value: 2.4, direction: inverse}
 
   - !<ColorSpace>
-    name: AgXc-log
+    name: AgXc Log
+    aliases: [AgXc-log]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: 32f
@@ -174,7 +176,8 @@ colorspaces:
         - !<AllocationTransform> {allocation: lg2, vars: [-12.47393, 4.026069]}
 
   - !<ColorSpace>
-    name: AgXc.base
+    name: AgXc Base
+    aliases: [AgXc.base]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
@@ -185,20 +188,21 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: BT.2020-linear}
+        - !<ColorSpaceTransform> {src: reference, dst: Linear Rec.2020}
         - !<MatrixTransform> {matrix: [0.472738636743224, 0.12687790806726, 0.400383455189515, 0, 0.186381444574505, 0.589240731652576, 0.224377823772918, 0, 0.134783472151827, 0.166178005290661, 0.699038522557512, 0, 0, 0, 0, 1]}
         - !<AllocationTransform> {allocation: lg2, vars: [-10, 15]}
         - !<FileTransform> {src: luminance-compensation.cube, interpolation: linear}
         - !<AllocationTransform> {allocation: lg2, vars: [-10, 15], direction: inverse}
         - !<MatrixTransform> {matrix: [0.608094094577481, 0.241305765375846, 0.150600140046673, 0, 0.267115783780114, 0.414480014218567, 0.318404202001318, 0, 0.16226708474612, 0.0674729411942575, 0.770259974059622, 0, 0, 0, 0, 1]}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc-log}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Log}
         - !<FileTransform> {src: AgX-tonescale-default.spi1d, interpolation: linear}
         - !<MatrixTransform> {matrix: [1.70401243235717, -0.279876242822721, -0.424136189534447, 0, -0.482927084048831, 1.90706327358328, -0.424136189534447, 0, -0.48292708404883, -0.279876242822721, 1.76280332687155, 0, 0, 0, 0, 1]}
         - !<MatrixTransform> {matrix: [1.660491002108, -0.587641138789, -0.07284986332, 0, -0.124550474522, 1.132899897126, -0.008349422604, 0, -0.018150763355, -0.100578898008, 1.118729661363, 0, 0, 0, 0, 1]}
         - !<ExponentTransform> {value: 2.4}
 
   - !<ColorSpace>
-    name: AgXc.softer
+    name: AgXc Softer
+    aliases: [AgXc.softer]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
@@ -209,20 +213,21 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: BT.2020-linear}
+        - !<ColorSpaceTransform> {src: reference, dst: Linear Rec.2020}
         - !<MatrixTransform> {matrix: [0.472738636743224, 0.12687790806726, 0.400383455189515, 0, 0.186381444574505, 0.589240731652576, 0.224377823772918, 0, 0.134783472151827, 0.166178005290661, 0.699038522557512, 0, 0, 0, 0, 1]}
         - !<AllocationTransform> {allocation: lg2, vars: [-10, 15]}
         - !<FileTransform> {src: luminance-compensation.cube, interpolation: linear}
         - !<AllocationTransform> {allocation: lg2, vars: [-10, 15], direction: inverse}
         - !<MatrixTransform> {matrix: [0.608094094577481, 0.241305765375846, 0.150600140046673, 0, 0.267115783780114, 0.414480014218567, 0.318404202001318, 0, 0.16226708474612, 0.0674729411942575, 0.770259974059622, 0, 0, 0, 0, 1]}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc-log}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Log}
         - !<FileTransform> {src: AgX-tonescale-hardtoe.spi1d, interpolation: linear}
         - !<MatrixTransform> {matrix: [1.70401243235717, -0.279876242822721, -0.424136189534447, 0, -0.482927084048831, 1.90706327358328, -0.424136189534447, 0, -0.48292708404883, -0.279876242822721, 1.76280332687155, 0, 0, 0, 0, 1]}
         - !<MatrixTransform> {matrix: [1.660491002108, -0.587641138789, -0.07284986332, 0, -0.124550474522, 1.132899897126, -0.008349422604, 0, -0.018150763355, -0.100578898008, 1.118729661363, 0, 0, 0, 0, 1]}
         - !<CDLTransform> {slope: [0.82, 0.82, 0.82]}
 
   - !<ColorSpace>
-    name: AgXc-tonescale-default
+    name: AgXc Tonescale - Default
+    aliases: [AgXc-tonescale-default]
     family: Colorspaces
     equalitygroup: ""
     bitdepth: unknown
@@ -231,13 +236,13 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc-log}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Log}
         - !<FileTransform> {src: AgX-tonescale-default.spi1d, interpolation: linear}
         - !<ExponentTransform> {value: 2.4}
 
   - !<ColorSpace>
-    name: Passthrough
-    aliases: [Raw, none, Utility - Raw]
+    name: Raw
+    aliases: [Raw, Passthrough, none, Utility - Raw]
     family: Utility
     equalitygroup: scalar
     bitdepth: 32f
@@ -246,8 +251,8 @@ colorspaces:
     allocation: uniform
 
   - !<ColorSpace>
-    name: sRGB-linear
-    aliases: [Linear Rec.709 (sRGB), lin_rec709_srgb, lin_rec709, lin_srgb, Utility - Linear - Rec.709, Utility - Linear - sRGB]
+    name: Linear Rec.709 (sRGB)
+    aliases: [lin_rec709_srgb, lin_rec709, lin_srgb, sRGB-linear, Utility - Linear - Rec.709, Utility - Linear - sRGB]
     family: Utility
     equalitygroup: ""
     bitdepth: 32f
@@ -268,7 +273,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: ACES2065-1
-    aliases: [aces2065_1, aces, ACES - ACES2065-1, lin_ap0, lin_ap0_scene]
+    aliases: [lin_ap0, lin_ap0_scene, aces2065_1, aces, ACES - ACES2065-1]
     family: ACES
     equalitygroup: ""
     bitdepth: 32f
@@ -279,7 +284,7 @@ colorspaces:
 
   - !<ColorSpace>
     name: CIE-XYZ-D65
-    aliases: [cie_xyz_d65_scene, lin_ciexyzd65_scene, CIE XYZ-D65 - Scene-referred]
+    aliases: [lin_ciexyzd65_scene, cie_xyz_d65_scene, CIE XYZ-D65 - Scene-referred]
     family: Utility
     equalitygroup: ""
     bitdepth: 32f
@@ -289,8 +294,8 @@ colorspaces:
     from_scene_reference: !<MatrixTransform> {matrix: [0.412390799266, 0.357584339384, 0.180480788402, 0, 0.212639005872, 0.715168678768, 0.072192315361, 0, 0.019330818716, 0.119194779795, 0.95053215225, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
-    name: BT.2020-linear
-    aliases: [lin_bt2020, lin_rec2020, Linear Rec.2020, Utility - Linear - Rec.2020]
+    name: Linear Rec.2020
+    aliases: [lin_bt2020, lin_rec2020, BT.2020-linear, Utility - Linear - Rec.2020]
     family: Utility
     equalitygroup: ""
     bitdepth: 32f
@@ -303,7 +308,8 @@ colorspaces:
     from_scene_reference: !<MatrixTransform> {matrix: [0.627403895935, 0.329283038378, 0.043313065687, 0, 0.069097289358, 0.919540395075, 0.011362315566, 0, 0.016391438875, 0.088013307877, 0.895595253248, 0, 0, 0, 0, 1]}
 
   - !<ColorSpace>
-    name: Image AgXc.base-Punchy sRGB-2.2
+    name: AgXc Base - Punchy - sRGB - Display
+    aliases: [Image AgXc.base-Punchy sRGB-2.2]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -316,12 +322,13 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.base-Punchy Display-P3
+    name: AgXc Base - Punchy - Display P3 - Display
+    aliases: [Image AgXc.base-Punchy Display-P3]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -334,12 +341,13 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.base-Punchy BT.1886
+    name: AgXc Base - Punchy - Rec.1886 - Display
+    aliases: [Image AgXc.base-Punchy BT.1886]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -352,18 +360,19 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.base-Punchy-custom sRGB-2.2
+    name: AgXc Base - Punchy - Custom - sRGB - Display
+    aliases: [Image AgXc.base-Punchy-custom sRGB-2.2]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.base image rendering transform
       - the Punchy look transform
       - a conversion for sRGB-2.2 display standard.
@@ -372,18 +381,19 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.base-Punchy-custom Display-P3
+    name: AgXc Base - Punchy - Custom - Display P3 - Display
+    aliases: [Image AgXc.base-Punchy-custom Display-P3]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.base image rendering transform
       - the Punchy look transform
       - a conversion for Display-P3 display standard.
@@ -392,18 +402,19 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.base-Punchy-custom BT.1886
+    name: AgXc Base - Punchy - Custom - Rec.1886 - Display
+    aliases: [Image AgXc.base-Punchy-custom BT.1886]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.base image rendering transform
       - the Punchy look transform
       - a conversion for BT.1886 display standard.
@@ -412,12 +423,13 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.base sRGB-2.2
+    name: AgXc Base - sRGB - Display
+    aliases: [Image AgXc.base sRGB-2.2]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -429,11 +441,12 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.base Display-P3
+    name: AgXc Base - Display P3 - Display
+    aliases: [Image AgXc.base Display-P3]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -445,11 +458,12 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.base BT.1886
+    name: AgXc Base - Rec.1886 - Display
+    aliases: [Image AgXc.base BT.1886]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -461,17 +475,18 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.base-custom sRGB-2.2
+    name: AgXc Base - Custom - sRGB - Display
+    aliases: [Image AgXc.base-custom sRGB-2.2]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.base image rendering transform
       - a conversion for sRGB-2.2 display standard.
     isdata: false
@@ -479,17 +494,18 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.base-custom Display-P3
+    name: AgXc Base - Custom - Display P3 - Display
+    aliases: [Image AgXc.base-custom Display-P3]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.base image rendering transform
       - a conversion for Display-P3 display standard.
     isdata: false
@@ -497,17 +513,18 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.base-custom BT.1886
+    name: AgXc Base - Custom - Rec.1886 - Display
+    aliases: [Image AgXc.base-custom BT.1886]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.base image rendering transform
       - a conversion for BT.1886 display standard.
     isdata: false
@@ -515,11 +532,12 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.base}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Base}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-Punchy sRGB-2.2
+    name: AgXc Softer - Punchy - sRGB - Display
+    aliases: [Image AgXc.softer-Punchy sRGB-2.2]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -532,12 +550,13 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-Punchy Display-P3
+    name: AgXc Softer - Punchy - Display P3 - Display
+    aliases: [Image AgXc.softer-Punchy Display-P3]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -550,12 +569,13 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-Punchy BT.1886
+    name: AgXc Softer - Punchy - Rec.1886 - Display
+    aliases: [Image AgXc.softer-Punchy BT.1886]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -568,18 +588,19 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-Punchy-custom sRGB-2.2
+    name: AgXc Softer - Punchy - Custom - sRGB - Display
+    aliases: [Image AgXc.softer-Punchy-custom sRGB-2.2]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.softer image rendering transform
       - the Punchy look transform
       - a conversion for sRGB-2.2 display standard.
@@ -588,18 +609,19 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-Punchy-custom Display-P3
+    name: AgXc Softer - Punchy - Custom - Display P3 - Display
+    aliases: [Image AgXc.softer-Punchy-custom Display-P3]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.softer image rendering transform
       - the Punchy look transform
       - a conversion for Display-P3 display standard.
@@ -608,18 +630,19 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-Punchy-custom BT.1886
+    name: AgXc Softer - Punchy - Custom - Rec.1886 - Display
+    aliases: [Image AgXc.softer-Punchy-custom BT.1886]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.softer image rendering transform
       - the Punchy look transform
       - a conversion for BT.1886 display standard.
@@ -628,12 +651,13 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<LookTransform> {src: BT.2020-linear, dst: BT.2020-linear, looks: Punchy}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<LookTransform> {src: Linear Rec.2020, dst: Linear Rec.2020, looks: Punchy}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.softer sRGB-2.2
+    name: AgXc Softer - sRGB - Display
+    aliases: [Image AgXc.softer sRGB-2.2]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -645,11 +669,12 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.softer Display-P3
+    name: AgXc Softer - Display P3 - Display
+    aliases: [Image AgXc.softer Display-P3]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -661,11 +686,12 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.softer BT.1886
+    name: AgXc Softer - Rec.1886 - Display
+    aliases: [Image AgXc.softer BT.1886]
     family: ""
     equalitygroup: ""
     bitdepth: unknown
@@ -677,17 +703,18 @@ colorspaces:
     allocation: uniform
     from_scene_reference: !<GroupTransform>
       children:
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-custom sRGB-2.2
+    name: AgXc Softer - Custom - sRGB - Display
+    aliases: [Image AgXc.softer-custom sRGB-2.2]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.softer image rendering transform
       - a conversion for sRGB-2.2 display standard.
     isdata: false
@@ -695,17 +722,18 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: sRGB-2.2}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: sRGB-2.2}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-custom Display-P3
+    name: AgXc Softer - Custom - Display P3 - Display
+    aliases: [Image AgXc.softer-custom Display-P3]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.softer image rendering transform
       - a conversion for Display-P3 display standard.
     isdata: false
@@ -713,17 +741,18 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: Display-P3}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: Display-P3}
 
   - !<ColorSpace>
-    name: Image AgXc.softer-custom BT.1886
+    name: AgXc Softer - Custom - Rec.1886 - Display
+    aliases: [Image AgXc.softer-custom BT.1886]
     family: Views
     equalitygroup: ""
     bitdepth: unknown
     description: |
       A display-referred/display-ready colorspace. Built with:
-      - 3 CDL nodes in BT.2020-linear, before display rendering
+      - 3 CDL nodes in Linear Rec.2020, before display rendering
       - the AgXc.softer image rendering transform
       - a conversion for BT.1886 display standard.
     isdata: false
@@ -731,5 +760,5 @@ colorspaces:
     from_scene_reference: !<GroupTransform>
       children:
         - !<LookTransform> {src: reference, dst: reference, looks: CustomCDL}
-        - !<ColorSpaceTransform> {src: reference, dst: AgXc.softer}
-        - !<ColorSpaceTransform> {src: BT.2020-linear, dst: BT.1886}
+        - !<ColorSpaceTransform> {src: reference, dst: AgXc Softer}
+        - !<ColorSpaceTransform> {src: Linear Rec.2020, dst: BT.1886}
