@@ -242,11 +242,11 @@ colorspaces:
 
   - !<ColorSpace>
     name: Raw
-    aliases: [Raw, Passthrough, none, Utility - Raw]
+    aliases: [Passthrough, none, Utility - Raw]
     family: Utility
     equalitygroup: scalar
     bitdepth: 32f
-    description: Passthrough means no transformations. Also know as "raw".
+    description: Raw means no transformations. Legacy alias is Passthrough.
     isdata: true
     allocation: uniform
 
