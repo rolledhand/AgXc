@@ -71,33 +71,7 @@ displays:
     - !<View> {name: AgXc.softer - custom, colorspace: Image AgXc.softer-custom sRGB-2.2}
     - !<View> {name: Disabled, colorspace: Passthrough}
     - !<View> {name: Display Native, colorspace: sRGB-2.2}
-  Display-P3:
-    - !<View> {name: AgXc.base Punchy, colorspace: Image AgXc.base-Punchy Display-P3}
-    - !<View> {name: AgXc.base Punchy - custom, colorspace: Image AgXc.base-Punchy-custom Display-P3}
-    - !<View> {name: AgXc.base, colorspace: Image AgXc.base Display-P3}
-    - !<View> {name: AgXc.base - custom, colorspace: Image AgXc.base-custom Display-P3}
-    - !<View> {name: AgXc.softer Punchy, colorspace: Image AgXc.softer-Punchy Display-P3}
-    - !<View> {name: AgXc.softer Punchy - custom, colorspace: Image AgXc.softer-Punchy-custom Display-P3}
-    - !<View> {name: AgXc.softer, colorspace: Image AgXc.softer Display-P3}
-    - !<View> {name: AgXc.softer - custom, colorspace: Image AgXc.softer-custom Display-P3}
-    - !<View> {name: Disabled, colorspace: Passthrough}
-    - !<View> {name: Display Native, colorspace: Display-P3}
-  BT.1886:
-    - !<View> {name: AgXc.base Punchy, colorspace: Image AgXc.base-Punchy BT.1886}
-    - !<View> {name: AgXc.base Punchy - custom, colorspace: Image AgXc.base-Punchy-custom BT.1886}
-    - !<View> {name: AgXc.base, colorspace: Image AgXc.base BT.1886}
-    - !<View> {name: AgXc.base - custom, colorspace: Image AgXc.base-custom BT.1886}
-    - !<View> {name: AgXc.softer Punchy, colorspace: Image AgXc.softer-Punchy BT.1886}
-    - !<View> {name: AgXc.softer Punchy - custom, colorspace: Image AgXc.softer-Punchy-custom BT.1886}
-    - !<View> {name: AgXc.softer, colorspace: Image AgXc.softer BT.1886}
-    - !<View> {name: AgXc.softer - custom, colorspace: Image AgXc.softer-custom BT.1886}
-    - !<View> {name: Disabled, colorspace: Passthrough}
-    - !<View> {name: Display Native, colorspace: BT.1886}
-  Pre-Display:
-    - !<View> {name: AgXc.base, colorspace: AgXc.base}
-    - !<View> {name: AgXc.softer, colorspace: AgXc.softer}
-
-active_displays: [sRGB-2.2, Display-P3, BT.1886]
+active_displays: [sRGB-2.2]
 active_views: []
 inactive_colorspaces: [Image AgXc.base-Punchy sRGB-2.2, Image AgXc.base-Punchy Display-P3,
                         Image AgXc.base-Punchy BT.1886, Image AgXc.base sRGB-2.2,
